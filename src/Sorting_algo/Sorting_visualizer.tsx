@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import bubbleSort from "./bubbleSort";
 import selectionSort from "./selectionSort";
+import mergeSort from "./mergeSort";
 
 const makeNewArray = () => {
   const newArray = [];
@@ -95,6 +96,51 @@ const Sorting_visualizer = () => {
     }
   };
 
+  const handleMergeSort = (array: number[]) => {
+    setIsDisabled(true);
+    const { animations } = mergeSort(array);
+    const array_bars = arrayContainerRef.current!.children;
+
+    for (let i = 0; i < animations.length; i++) {
+      const isComparison = animations[i].length === 2; // Check if it's a comparison or an overwrite
+      const [index1, index2OrValue] = animations[i];
+
+      setTimeout(() => {
+        if (isComparison) {
+          // Highlight the bars being compared
+          const barOne = array_bars[index1] as HTMLElement;
+          const barTwo = array_bars[index2OrValue] as HTMLElement;
+
+          barOne.style.backgroundColor = "yellow";
+          barTwo.style.backgroundColor = "yellow";
+
+          setTimeout(() => {
+            barOne.style.backgroundColor = "turquoise";
+            barTwo.style.backgroundColor = "turquoise";
+          }, 5);
+        } else {
+          // Overwrite the height of the bar at index1
+          const bar = array_bars[index1] as HTMLElement;
+          bar.style.height = `${index2OrValue * 10}px`;
+          bar.style.backgroundColor = "red";
+
+          setTimeout(() => {
+            bar.style.backgroundColor = "turquoise";
+          }, 5);
+        }
+      }, i * 10);
+
+      if (i === animations.length - 1) {
+        setTimeout(
+          () => {
+            setIsDisabled(false);
+          },
+          i * 10 + 10,
+        );
+      }
+    }
+  };
+
   useEffect(() => {
     setRandomArray(makeNewArray());
   }, []);
@@ -137,6 +183,15 @@ const Sorting_visualizer = () => {
         disabled={isDisabled}
       >
         Selection sort
+      </button>
+      <button
+        onClick={() => {
+          setIsDisabled(true);
+          handleMergeSort(randomArray);
+        }}
+        disabled={isDisabled}
+      >
+        Merge sort
       </button>
     </>
   );
