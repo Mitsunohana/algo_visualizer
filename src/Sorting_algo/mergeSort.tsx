@@ -1,28 +1,59 @@
-const mergeSort = (array: number[]): number[] => {
-  if (array.length <= 1) return array;
-  const copiedArray = [...array];
+const mergeSort = (
+  array: number[],
+): { animations: number[][]; sortedArray: number[] } => {
+  const animations: number[][] = [];
+  const auxiliaryArray = [...array];
 
-  const mid = Math.floor(copiedArray.length / 2);
-  const left = copiedArray.slice(0, mid);
-  const right = copiedArray.slice(mid);
+  const mergeSortHelper = (mainArray: number[], start: number, end: number) => {
+    if (start >= end) return;
 
-  return merge(mergeSort(left), mergeSort(right));
-};
+    const middle = Math.floor((start + end) / 2);
+    mergeSortHelper(mainArray, start, middle);
+    mergeSortHelper(mainArray, middle + 1, end);
+    merge(mainArray, auxiliaryArray, start, middle, end);
+  };
 
-const merge = (left: number[], right: number[]): number[] => {
-  const newArray = [];
-  let leftIndex = 0;
-  let rightIndex = 0;
+  const merge = (
+    mainArray: number[],
+    auxiliaryArray: number[],
+    start: number,
+    middle: number,
+    end: number,
+  ) => {
+    let k = start;
+    let i = start;
+    let j = middle + 1;
 
-  while (leftIndex < left.length && rightIndex < right.length) {
-    if (left[leftIndex] < right[rightIndex]) {
-      newArray.push(left[leftIndex]);
-      leftIndex++;
-    } else {
-      newArray.push(right[rightIndex]);
-      rightIndex++;
+    while (i <= middle && j <= end) {
+      animations.push([i, j]); // Compare i and j
+      if (auxiliaryArray[i] <= auxiliaryArray[j]) {
+        animations.push([k, auxiliaryArray[i]]); // Overwrite value at index k with auxiliaryArray[i]
+        mainArray[k++] = auxiliaryArray[i++];
+      } else {
+        animations.push([k, auxiliaryArray[j]]); // Overwrite value at index k with auxiliaryArray[j]
+        mainArray[k++] = auxiliaryArray[j++];
+      }
     }
-  }
 
-  return newArray.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+    while (i <= middle) {
+      animations.push([i, i]); // Compare i with itself (visualization step)
+      animations.push([k, auxiliaryArray[i]]); // Overwrite value at index k with auxiliaryArray[i]
+      mainArray[k++] = auxiliaryArray[i++];
+    }
+
+    while (j <= end) {
+      animations.push([j, j]); // Compare j with itself (visualization step)
+      animations.push([k, auxiliaryArray[j]]); // Overwrite value at index k with auxiliaryArray[j]
+      mainArray[k++] = auxiliaryArray[j++];
+    }
+
+    for (let x = start; x <= end; x++) {
+      auxiliaryArray[x] = mainArray[x];
+    }
+  };
+
+  mergeSortHelper(array, 0, array.length - 1);
+  return { animations, sortedArray: array };
 };
+
+export default mergeSort;
