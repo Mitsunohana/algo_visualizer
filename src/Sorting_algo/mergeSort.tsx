@@ -1,59 +1,71 @@
-const mergeSort = (
-  array: number[],
-): { animations: number[][]; sortedArray: number[] } => {
+export function mergeSort(array: number[]) {
   const animations: number[][] = [];
-  const auxiliaryArray = [...array];
+  if (array.length <= 1) return animations;
 
-  const mergeSortHelper = (mainArray: number[], start: number, end: number) => {
-    if (start >= end) return;
+  const mainArray = [...array]; // Copy of the original array for sorting
+  const auxiliaryArray = [...array]; // Auxiliary array for merging
+  mergeSortHelper(
+    mainArray,
+    0,
+    mainArray.length - 1,
+    auxiliaryArray,
+    animations,
+  );
+  return animations;
+}
 
-    const middle = Math.floor((start + end) / 2);
-    mergeSortHelper(mainArray, start, middle);
-    mergeSortHelper(mainArray, middle + 1, end);
-    merge(mainArray, auxiliaryArray, start, middle, end);
-  };
+function mergeSortHelper(
+  mainArray: number[],
+  startIdx: number,
+  endIdx: number,
+  auxiliaryArray: number[],
+  animations: number[][],
+) {
+  if (startIdx === endIdx) return;
 
-  const merge = (
-    mainArray: number[],
-    auxiliaryArray: number[],
-    start: number,
-    middle: number,
-    end: number,
-  ) => {
-    let k = start;
-    let i = start;
-    let j = middle + 1;
+  const middleIdx = Math.floor((startIdx + endIdx) / 2);
+  mergeSortHelper(auxiliaryArray, startIdx, middleIdx, mainArray, animations);
+  mergeSortHelper(auxiliaryArray, middleIdx + 1, endIdx, mainArray, animations);
+  doMerge(mainArray, startIdx, middleIdx, endIdx, auxiliaryArray, animations);
+}
 
-    while (i <= middle && j <= end) {
-      animations.push([i, j]); // Compare i and j
-      if (auxiliaryArray[i] <= auxiliaryArray[j]) {
-        animations.push([k, auxiliaryArray[i]]); // Overwrite value at index k with auxiliaryArray[i]
-        mainArray[k++] = auxiliaryArray[i++];
-      } else {
-        animations.push([k, auxiliaryArray[j]]); // Overwrite value at index k with auxiliaryArray[j]
-        mainArray[k++] = auxiliaryArray[j++];
-      }
-    }
+function doMerge(
+  mainArray: number[],
+  startIdx: number,
+  middleIdx: number,
+  endIdx: number,
+  auxiliaryArray: number[],
+  animations: number[][],
+) {
+  let k = startIdx;
+  let i = startIdx;
+  let j = middleIdx + 1;
 
-    while (i <= middle) {
-      animations.push([i, i]); // Compare i with itself (visualization step)
-      animations.push([k, auxiliaryArray[i]]); // Overwrite value at index k with auxiliaryArray[i]
+  while (i <= middleIdx && j <= endIdx) {
+    // Record comparisons
+    animations.push([i, j]); // Highlight comparison
+    animations.push([i, j]); // Revert color
+
+    if (auxiliaryArray[i] <= auxiliaryArray[j]) {
+      animations.push([k, auxiliaryArray[i]]); // Overwrite step
       mainArray[k++] = auxiliaryArray[i++];
-    }
-
-    while (j <= end) {
-      animations.push([j, j]); // Compare j with itself (visualization step)
-      animations.push([k, auxiliaryArray[j]]); // Overwrite value at index k with auxiliaryArray[j]
+    } else {
+      animations.push([k, auxiliaryArray[j]]); // Overwrite step
       mainArray[k++] = auxiliaryArray[j++];
     }
+  }
 
-    for (let x = start; x <= end; x++) {
-      auxiliaryArray[x] = mainArray[x];
-    }
-  };
+  while (i <= middleIdx) {
+    animations.push([i, i]); // Highlight comparison
+    animations.push([i, i]); // Revert color
+    animations.push([k, auxiliaryArray[i]]); // Overwrite step
+    mainArray[k++] = auxiliaryArray[i++];
+  }
 
-  mergeSortHelper(array, 0, array.length - 1);
-  return { animations, sortedArray: array };
-};
-
-export default mergeSort;
+  while (j <= endIdx) {
+    animations.push([j, j]); // Highlight comparison
+    animations.push([j, j]); // Revert color
+    animations.push([k, auxiliaryArray[j]]); // Overwrite step
+    mainArray[k++] = auxiliaryArray[j++];
+  }
+}

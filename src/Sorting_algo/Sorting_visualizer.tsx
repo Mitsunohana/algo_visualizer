@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import bubbleSort from "./bubbleSort";
 import selectionSort from "./selectionSort";
-import mergeSort from "./mergeSort";
+import { mergeSort } from "./mergeSort";
 
 const makeNewArray = () => {
   const newArray = [];
@@ -98,48 +98,71 @@ const Sorting_visualizer = () => {
 
   const handleMergeSort = (array: number[]) => {
     setIsDisabled(true);
-    const { animations } = mergeSort(array);
-    const array_bars = arrayContainerRef.current!.children;
-
+    const animations = mergeSort(array);
     for (let i = 0; i < animations.length; i++) {
-      const isComparison = animations[i].length === 2; // Check if it's a comparison or an overwrite
-      const [index1, index2OrValue] = animations[i];
+      const arrayBars = document.getElementsByClassName("array-bar");
+      const isColorChange = i % 3 !== 2;
+      if (isColorChange) {
+        const [barOneIdx, barTwoIdx] = animations[i];
+        const arrayBar1 = arrayBars[barOneIdx] as HTMLElement;
+        const arrayBar2 = arrayBars[barTwoIdx] as HTMLElement;
 
-      setTimeout(() => {
-        if (isComparison) {
-          // Highlight the bars being compared
-          const barOne = array_bars[index1] as HTMLElement;
-          const barTwo = array_bars[index2OrValue] as HTMLElement;
-
-          barOne.style.backgroundColor = "yellow";
-          barTwo.style.backgroundColor = "yellow";
-
-          setTimeout(() => {
-            barOne.style.backgroundColor = "turquoise";
-            barTwo.style.backgroundColor = "turquoise";
-          }, 5);
-        } else {
-          // Overwrite the height of the bar at index1
-          const bar = array_bars[index1] as HTMLElement;
-          bar.style.height = `${index2OrValue * 10}px`;
-          bar.style.backgroundColor = "red";
-
-          setTimeout(() => {
-            bar.style.backgroundColor = "turquoise";
-          }, 5);
-        }
-      }, i * 10);
-
-      if (i === animations.length - 1) {
-        setTimeout(
-          () => {
-            setIsDisabled(false);
-          },
-          i * 10 + 10,
-        );
+        const barOneStyle = arrayBar1.style;
+        const barTwoStyle = arrayBar2.style;
+        const color = i % 3 === 0 ? "yellow" : "turquoise";
+        setTimeout(() => {
+          barOneStyle.backgroundColor = color;
+          barTwoStyle.backgroundColor = color;
+        }, i * 10);
+      } else {
+        setTimeout(() => {
+          const [barOneIdx, newHeight] = animations[i];
+          const arrayBar1 = arrayBars[barOneIdx] as HTMLElement;
+          const barOneStyle = arrayBar1.style;
+          barOneStyle.height = `${newHeight}px`;
+        }, i * 10);
       }
     }
   };
+
+  // const handleMergeSort = (array: number[]) => {
+  //   setIsDisabled(true);
+  //   const animations = mergeSort(array);
+  //   const array_bars = arrayContainerRef.current!.children;
+  //   console.log(animations);
+  //   for (let i = 0; i < animations.length; i++) {
+  //     setTimeout(() => {
+  //       const barOne = array_bars[animations[i][0]] as HTMLElement;
+  //       const barTwo = array_bars[animations[i][1]] as HTMLElement;
+  //       const barOneHeigth = parseInt(barOne.style.height);
+  //       const barTwoHeigth = parseInt(barTwo.style.height);
+  //       barOne.style.backgroundColor = "yellow";
+  //       barTwo.style.backgroundColor = "yellow";
+
+  //       if (barOneHeigth > barTwoHeigth) {
+  //         const temp = barOneHeigth;
+  //         barOne.style.height = `${barTwoHeigth}px`;
+  //         barTwo.style.height = `${temp}px`;
+  //         barOne.style.backgroundColor = "red";
+  //         barTwo.style.backgroundColor = "red";
+  //       }
+
+  //       setTimeout(() => {
+  //         barOne.style.backgroundColor = "turquoise";
+  //         barTwo.style.backgroundColor = "turquoise";
+  //       }, 5);
+  //     }, i * 100);
+
+  //     if (i == animations.length - 1) {
+  //       setTimeout(
+  //         () => {
+  //           setIsDisabled(false);
+  //         },
+  //         i * 100 + 10,
+  //       );
+  //     }
+  //   }
+  // };
 
   useEffect(() => {
     setRandomArray(makeNewArray());
