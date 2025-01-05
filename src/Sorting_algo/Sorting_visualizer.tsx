@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import bubbleSort from "./bubbleSort";
 import selectionSort from "./selectionSort";
 import { mergeSort } from "./mergeSort";
+import insertionSort from "./insertionSort";
 
 const makeNewArray = () => {
   const newArray = [];
@@ -125,44 +126,10 @@ const Sorting_visualizer = () => {
     }
   };
 
-  // const handleMergeSort = (array: number[]) => {
-  //   setIsDisabled(true);
-  //   const animations = mergeSort(array);
-  //   const array_bars = arrayContainerRef.current!.children;
-  //   console.log(animations);
-  //   for (let i = 0; i < animations.length; i++) {
-  //     setTimeout(() => {
-  //       const barOne = array_bars[animations[i][0]] as HTMLElement;
-  //       const barTwo = array_bars[animations[i][1]] as HTMLElement;
-  //       const barOneHeigth = parseInt(barOne.style.height);
-  //       const barTwoHeigth = parseInt(barTwo.style.height);
-  //       barOne.style.backgroundColor = "yellow";
-  //       barTwo.style.backgroundColor = "yellow";
-
-  //       if (barOneHeigth > barTwoHeigth) {
-  //         const temp = barOneHeigth;
-  //         barOne.style.height = `${barTwoHeigth}px`;
-  //         barTwo.style.height = `${temp}px`;
-  //         barOne.style.backgroundColor = "red";
-  //         barTwo.style.backgroundColor = "red";
-  //       }
-
-  //       setTimeout(() => {
-  //         barOne.style.backgroundColor = "turquoise";
-  //         barTwo.style.backgroundColor = "turquoise";
-  //       }, 5);
-  //     }, i * 100);
-
-  //     if (i == animations.length - 1) {
-  //       setTimeout(
-  //         () => {
-  //           setIsDisabled(false);
-  //         },
-  //         i * 100 + 10,
-  //       );
-  //     }
-  //   }
-  // };
+  const handleInsertionSort = (array: number[]) => {
+    const animations = insertionSort(array);
+    console.log(animations);
+  };
 
   useEffect(() => {
     setRandomArray(makeNewArray());
@@ -215,6 +182,15 @@ const Sorting_visualizer = () => {
         disabled={isDisabled}
       >
         Merge sort
+      </button>
+      <button
+        onClick={() => {
+          setIsDisabled(true);
+          handleInsertionSort(randomArray);
+        }}
+        disabled={isDisabled}
+      >
+        Insertion sort
       </button>
     </>
   );
