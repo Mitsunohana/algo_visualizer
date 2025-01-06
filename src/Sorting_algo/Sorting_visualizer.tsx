@@ -126,9 +126,83 @@ const Sorting_visualizer = () => {
     }
   };
 
+  // const handleInsertionSort = (array: number[]) => {
+  //   setIsDisabled(true);
+  //   const animations = insertionSort(array);
+  //   const array_bars = arrayContainerRef.current!.children;
+  //   console.log(animations);
+  //   for (let i = 0; i < animations.length; i++) {
+  //     setTimeout(() => {
+  //       const barOne = array_bars[animations[i][0]] as HTMLElement;
+  //       const barTwo = array_bars[animations[i][1]] as HTMLElement;
+  //       const key = animations[i][2];
+
+  //       const barOneHeigth = parseInt(barOne.style.height);
+  //       const barTwoHeigth = parseInt(barTwo.style.height);
+  //       barOne.style.backgroundColor = "yellow";
+  //       barTwo.style.backgroundColor = "yellow";
+
+  //       if (barOneHeigth > key) {
+  //         barTwo.style.height = `${barOneHeigth}px`;
+  //       } else {
+  //         barTwo.style.height = `${key}px`;
+  //       }
+  //       setTimeout(() => {
+  //         barOne.style.backgroundColor = "turquoise";
+  //         barTwo.style.backgroundColor = "turquoise";
+  //       }, 5);
+  //     }, i * 10);
+
+  //     if (i == animations.length - 1) {
+  //       setTimeout(
+  //         () => {
+  //           setIsDisabled(false);
+  //         },
+  //         i * 10 + 10,
+  //       );
+  //     }
+  //   }
+  // };
+
   const handleInsertionSort = (array: number[]) => {
+    setIsDisabled(true);
     const animations = insertionSort(array);
-    console.log(animations);
+    const array_bars = arrayContainerRef.current!.children;
+
+    for (let i = 0; i < animations.length; i++) {
+      const [index1, index2OrValue, action] = animations[i];
+
+      setTimeout(() => {
+        if (action === 0) {
+          const barOne = array_bars[index1] as HTMLElement;
+          const barTwo = array_bars[index2OrValue] as HTMLElement;
+          barOne.style.backgroundColor = "yellow";
+          barTwo.style.backgroundColor = "yellow";
+
+          setTimeout(() => {
+            barOne.style.backgroundColor = "turquoise";
+            barTwo.style.backgroundColor = "turquoise";
+          }, 5);
+        } else if (action === 1) {
+          const bar = array_bars[index1] as HTMLElement;
+          bar.style.height = `${index2OrValue}px`;
+          bar.style.backgroundColor = "red";
+
+          setTimeout(() => {
+            bar.style.backgroundColor = "turquoise";
+          }, 5);
+        }
+      }, i * 10);
+
+      if (i === animations.length - 1) {
+        setTimeout(
+          () => {
+            setIsDisabled(false);
+          },
+          i * 10 + 10,
+        );
+      }
+    }
   };
 
   useEffect(() => {
