@@ -1,4 +1,4 @@
-export function mergeSort(array: number[]) {
+const mergeSort = (array: number[]) => {
   const animations: number[][] = [];
   if (array.length <= 1) return animations;
 
@@ -12,7 +12,7 @@ export function mergeSort(array: number[]) {
     animations,
   );
   return animations;
-}
+};
 
 function mergeSortHelper(
   mainArray: number[],
@@ -69,3 +69,5 @@ function doMerge(
     mainArray[k++] = auxiliaryArray[j++];
   }
 }
+
+export default mergeSort;

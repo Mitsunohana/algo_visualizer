@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
 import bubbleSort from "./bubbleSort";
 import selectionSort from "./selectionSort";
-import { mergeSort } from "./mergeSort";
+import mergeSort from "./mergeSort";
 import insertionSort from "./insertionSort";
+
+const ANIMATION_SPEED = 10;
 
 const makeNewArray = () => {
   const newArray = [];
@@ -45,15 +47,15 @@ const Sorting_visualizer = () => {
             barOne.style.height = `${barToSwapHeigth}px`;
             barToSwap.style.height = `${barOneHeigth}px`;
           }
-        }, 5);
-      }, i * 10);
+        }, ANIMATION_SPEED / 2);
+      }, i * ANIMATION_SPEED);
 
       if (i == animations.length - 1) {
         setTimeout(
           () => {
             setIsDisabled(false);
           },
-          i * 10 + 10,
+          i * ANIMATION_SPEED + ANIMATION_SPEED,
         );
       }
     }
@@ -83,15 +85,15 @@ const Sorting_visualizer = () => {
         setTimeout(() => {
           barOne.style.backgroundColor = "turquoise";
           barTwo.style.backgroundColor = "turquoise";
-        }, 5);
-      }, i * 10);
+        }, ANIMATION_SPEED / 2);
+      }, i * ANIMATION_SPEED);
 
       if (i == animations.length - 1) {
         setTimeout(
           () => {
             setIsDisabled(false);
           },
-          i * 10 + 10,
+          i * ANIMATION_SPEED + ANIMATION_SPEED,
         );
       }
     }
@@ -114,55 +116,17 @@ const Sorting_visualizer = () => {
         setTimeout(() => {
           barOneStyle.backgroundColor = color;
           barTwoStyle.backgroundColor = color;
-        }, i * 10);
+        }, i * ANIMATION_SPEED);
       } else {
         setTimeout(() => {
           const [barOneIdx, newHeight] = animations[i];
           const arrayBar1 = arrayBars[barOneIdx] as HTMLElement;
           const barOneStyle = arrayBar1.style;
           barOneStyle.height = `${newHeight}px`;
-        }, i * 10);
+        }, i * ANIMATION_SPEED);
       }
     }
   };
-
-  // const handleInsertionSort = (array: number[]) => {
-  //   setIsDisabled(true);
-  //   const animations = insertionSort(array);
-  //   const array_bars = arrayContainerRef.current!.children;
-  //   console.log(animations);
-  //   for (let i = 0; i < animations.length; i++) {
-  //     setTimeout(() => {
-  //       const barOne = array_bars[animations[i][0]] as HTMLElement;
-  //       const barTwo = array_bars[animations[i][1]] as HTMLElement;
-  //       const key = animations[i][2];
-
-  //       const barOneHeigth = parseInt(barOne.style.height);
-  //       const barTwoHeigth = parseInt(barTwo.style.height);
-  //       barOne.style.backgroundColor = "yellow";
-  //       barTwo.style.backgroundColor = "yellow";
-
-  //       if (barOneHeigth > key) {
-  //         barTwo.style.height = `${barOneHeigth}px`;
-  //       } else {
-  //         barTwo.style.height = `${key}px`;
-  //       }
-  //       setTimeout(() => {
-  //         barOne.style.backgroundColor = "turquoise";
-  //         barTwo.style.backgroundColor = "turquoise";
-  //       }, 5);
-  //     }, i * 10);
-
-  //     if (i == animations.length - 1) {
-  //       setTimeout(
-  //         () => {
-  //           setIsDisabled(false);
-  //         },
-  //         i * 10 + 10,
-  //       );
-  //     }
-  //   }
-  // };
 
   const handleInsertionSort = (array: number[]) => {
     setIsDisabled(true);
@@ -182,7 +146,7 @@ const Sorting_visualizer = () => {
           setTimeout(() => {
             barOne.style.backgroundColor = "turquoise";
             barTwo.style.backgroundColor = "turquoise";
-          }, 5);
+          }, ANIMATION_SPEED / 2);
         } else if (action === 1) {
           const bar = array_bars[index1] as HTMLElement;
           bar.style.height = `${index2OrValue}px`;
@@ -190,16 +154,16 @@ const Sorting_visualizer = () => {
 
           setTimeout(() => {
             bar.style.backgroundColor = "turquoise";
-          }, 5);
+          }, ANIMATION_SPEED / 2);
         }
-      }, i * 10);
+      }, i * ANIMATION_SPEED);
 
       if (i === animations.length - 1) {
         setTimeout(
           () => {
             setIsDisabled(false);
           },
-          i * 10 + 10,
+          i * ANIMATION_SPEED + ANIMATION_SPEED,
         );
       }
     }
@@ -251,20 +215,20 @@ const Sorting_visualizer = () => {
       <button
         onClick={() => {
           setIsDisabled(true);
-          handleMergeSort(randomArray);
-        }}
-        disabled={isDisabled}
-      >
-        Merge sort
-      </button>
-      <button
-        onClick={() => {
-          setIsDisabled(true);
           handleInsertionSort(randomArray);
         }}
         disabled={isDisabled}
       >
         Insertion sort
+      </button>
+      <button
+        onClick={() => {
+          setIsDisabled(true);
+          handleMergeSort(randomArray);
+        }}
+        disabled={isDisabled}
+      >
+        Merge sort
       </button>
     </>
   );
