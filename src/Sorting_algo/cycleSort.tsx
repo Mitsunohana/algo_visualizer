@@ -1,14 +1,15 @@
 function cycleSort(array: number[]) {
-  let writes = 0; // Count the number of writes
-
+  const copiedArray = [...array];
+  const animations = [];
   // Loop through the arrayay
-  for (let cycleStart = 0; cycleStart < array.length - 1; cycleStart++) {
-    let item = array[cycleStart]; // Element to place in its correct position
+  for (let cycleStart = 0; cycleStart < copiedArray.length - 1; cycleStart++) {
+    let item = copiedArray[cycleStart]; // Element to place in its correct position
 
     // Find the position where the item belongs
     let pos = cycleStart;
-    for (let i = cycleStart + 1; i < array.length; i++) {
-      if (array[i] < item) {
+    for (let i = cycleStart + 1; i < copiedArray.length; i++) {
+      animations.push([cycleStart, i, 0]);
+      if (copiedArray[i] < item) {
         pos++;
       }
     }
@@ -17,14 +18,14 @@ function cycleSort(array: number[]) {
     if (pos === cycleStart) continue;
 
     // Skip duplicates
-    while (item === array[pos]) {
+    while (item === copiedArray[pos]) {
       pos++;
     }
 
     // Swap the item with the correct position
     if (pos !== cycleStart) {
-      [array[pos], item] = [item, array[pos]];
-      writes++;
+      animations.push([cycleStart, pos, 1]);
+      [copiedArray[pos], item] = [item, copiedArray[pos]];
     }
 
     // Rotate the rest of the cycle
@@ -32,26 +33,27 @@ function cycleSort(array: number[]) {
       pos = cycleStart;
 
       // Find the new position for the current item
-      for (let i = cycleStart + 1; i < array.length; i++) {
-        if (array[i] < item) {
+      for (let i = cycleStart + 1; i < copiedArray.length; i++) {
+        animations.push([cycleStart, i, 0]);
+        if (copiedArray[i] < item) {
           pos++;
         }
       }
 
       // Skip duplicates
-      while (item === array[pos]) {
+      while (item === copiedArray[pos]) {
         pos++;
       }
 
       // Swap again
-      if (item !== array[pos]) {
-        [array[pos], item] = [item, array[pos]];
-        writes++;
+      if (item !== copiedArray[pos]) {
+        animations.push([cycleStart, pos, 1]);
+        [copiedArray[pos], item] = [item, copiedArray[pos]];
       }
     }
   }
 
-  return array;
+  return animations;
 }
 
 export default cycleSort;
