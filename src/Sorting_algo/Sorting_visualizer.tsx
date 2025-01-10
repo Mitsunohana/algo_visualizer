@@ -3,6 +3,7 @@ import bubbleSort from "./bubbleSort";
 import selectionSort from "./selectionSort";
 import mergeSort from "./mergeSort";
 import insertionSort from "./insertionSort";
+import cycleSort from "./cycleSort";
 
 const ANIMATION_SPEED = 10;
 
@@ -128,6 +129,37 @@ const Sorting_visualizer = () => {
     }
   };
 
+  const handleCycleSort = (array: number[]) => {
+    setIsDisabled(true);
+    const animations = cycleSort(array);
+    const array_bars = arrayContainerRef.current!.children;
+
+    for (let i = 0; i < animations.length; i++) {
+      setTimeout(() => {
+        const barOne = array_bars[animations[i][0]] as HTMLElement;
+        const barTwo = array_bars[animations[i][1]] as HTMLElement;
+        const swap = animations[i][2];
+        const barOneHeigth = parseInt(barOne.style.height);
+        const barTwoHeigth = parseInt(barTwo.style.height);
+        barOne.style.backgroundColor = "yellow";
+        barTwo.style.backgroundColor = "yellow";
+
+        if (swap) {
+          const temp = barOneHeigth;
+          barOne.style.height = `${barTwoHeigth}px`;
+          barTwo.style.height = `${temp}px`;
+        }
+
+        setTimeout(() => {
+          barOne.style.backgroundColor = "turquoise";
+          barTwo.style.backgroundColor = "turquoise";
+        }, ANIMATION_SPEED / 2);
+      }, i * ANIMATION_SPEED);
+    }
+
+    console.log(animations);
+  };
+
   const handleInsertionSort = (array: number[]) => {
     setIsDisabled(true);
     const animations = insertionSort(array);
@@ -220,6 +252,15 @@ const Sorting_visualizer = () => {
         disabled={isDisabled}
       >
         Insertion sort
+      </button>
+      <button
+        onClick={() => {
+          setIsDisabled(true);
+          handleCycleSort(randomArray);
+        }}
+        disabled={isDisabled}
+      >
+        Cycle sort
       </button>
       <button
         onClick={() => {
