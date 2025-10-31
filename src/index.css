@@ -1,3 +1,10 @@
+.array-wrapper {
+  display: flex;
+  width: 100%;
+  height: 500px;
+  border: 2px solid black;
+}
+
 .array-container {
   display: flex;
   width: 100%;
@@ -6,7 +13,7 @@
 }
 .array-bar {
   flex: 1;
-  background-color: turquoise;
+  background-color: gray;
   margin: 0 1px;
   text-align: center;
 }
