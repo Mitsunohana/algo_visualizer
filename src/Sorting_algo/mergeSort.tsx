@@ -1,5 +1,7 @@
+import { animationsType } from "../utils/types";
+
 const mergeSort = (array: number[]) => {
-  const animations: number[][] = [];
+  const animations: animationsType = [];
   if (array.length <= 1) return animations;
 
   const mainArray = [...array]; // Copy of the original array for sorting

@@ -5,6 +5,7 @@ import insertionSort from "../Sorting_algo/insertionSort";
 import cycleSort from "../Sorting_algo/cycleSort";
 import quickSort from "../Sorting_algo/quickSort";
 import { delay } from "../utils/utils";
+import { ACTION } from "../utils/types";
 
 const ANIMATION_SPEED = 10;
 
@@ -16,11 +17,11 @@ export const useSortHandlers = (
   const handleBubbleSort = async (array: number[]) => {
     setIsDisabled(true);
     const animations = bubbleSort(array);
-    const array_bars = arrayContainerRef.current!.children;
+    const arrayBars = arrayContainerRef.current!.children;
 
     for (let i = 0; i < animations.length; i++) {
-      const barOne = array_bars[animations[i][0]] as HTMLElement;
-      const barTwo = array_bars[animations[i][1]] as HTMLElement;
+      const barOne = arrayBars[animations[i][0]] as HTMLElement;
+      const barTwo = arrayBars[animations[i][1]] as HTMLElement;
       const barOneHeigth = parseInt(barOne.style.height);
       const barTwoHeigth = parseInt(barTwo.style.height);
       barOne.style.backgroundColor = "yellow";
@@ -40,6 +41,8 @@ export const useSortHandlers = (
 
       barOne.style.backgroundColor = "gray";
       barTwo.style.backgroundColor = "gray";
+
+      await delay(ANIMATION_SPEED);
     }
 
     setIsSorted(true);
@@ -49,28 +52,30 @@ export const useSortHandlers = (
   const handleSelectionSort = async (array: number[]) => {
     setIsDisabled(true);
     const animations = selectionSort(array);
-    const array_bars = arrayContainerRef.current!.children;
+    const arrayBars = arrayContainerRef.current!.children;
 
     for (let i = 0; i < animations.length; i++) {
-      const barToSwap = array_bars[animations[i][0]] as HTMLElement;
-      const barOne = array_bars[animations[i][1]] as HTMLElement;
-      const barTwo = array_bars[animations[i][2]] as HTMLElement;
+      const barToSwap = arrayBars[animations[i][0]] as HTMLElement;
+      const barOne = arrayBars[animations[i][1]] as HTMLElement;
+      const barTwo = arrayBars[animations[i][2]] as HTMLElement;
+      const action = animations[i][3];
       const barOneHeigth = parseInt(barOne.style.height);
       const barToSwapHeigth = parseInt(barToSwap.style.height);
-      if (!animations[i][3]) {
+      if (action === ACTION.COMPARE) {
         barOne.style.backgroundColor = "yellow";
         barTwo.style.backgroundColor = "yellow";
       }
-      await delay(ANIMATION_SPEED / 2);
+      await delay(ANIMATION_SPEED);
 
       barOne.style.backgroundColor = "gray";
       barTwo.style.backgroundColor = "gray";
-      await delay(ANIMATION_SPEED / 2);
 
-      if (animations[i][3] && barOneHeigth < barToSwapHeigth) {
+      if (action === ACTION.SWAP && barOneHeigth < barToSwapHeigth) {
         barOne.style.height = `${barToSwapHeigth}px`;
         barToSwap.style.height = `${barOneHeigth}px`;
       }
+
+      await delay(ANIMATION_SPEED);
     }
 
     setIsDisabled(false);
@@ -80,14 +85,14 @@ export const useSortHandlers = (
   const handleInsertionSort = async (array: number[]) => {
     setIsDisabled(true);
     const animations = insertionSort(array);
-    const array_bars = arrayContainerRef.current!.children;
+    const arrayBars = arrayContainerRef.current!.children;
 
     for (let i = 0; i < animations.length; i++) {
       const [index1, index2OrValue, action] = animations[i];
 
-      if (action === 0) {
-        const barOne = array_bars[index1] as HTMLElement;
-        const barTwo = array_bars[index2OrValue] as HTMLElement;
+      if (action === ACTION.COMPARE) {
+        const barOne = arrayBars[index1] as HTMLElement;
+        const barTwo = arrayBars[index2OrValue] as HTMLElement;
         barOne.style.backgroundColor = "yellow";
         barTwo.style.backgroundColor = "yellow";
 
@@ -95,14 +100,14 @@ export const useSortHandlers = (
 
         barOne.style.backgroundColor = "gray";
         barTwo.style.backgroundColor = "gray";
-      } else if (action === 1) {
-        const bar = array_bars[index1] as HTMLElement;
-        bar.style.height = `${index2OrValue}px`;
-        bar.style.backgroundColor = "red";
+      } else if (action === ACTION.SWAP) {
+        const barOne = arrayBars[index1] as HTMLElement;
+        barOne.style.height = `${index2OrValue}px`;
+        barOne.style.backgroundColor = "red";
 
         await delay(ANIMATION_SPEED);
 
-        bar.style.backgroundColor = "gray";
+        barOne.style.backgroundColor = "gray";
       }
 
       await delay(ANIMATION_SPEED);
@@ -115,12 +120,12 @@ export const useSortHandlers = (
   const handleCycleSort = async (array: number[]) => {
     setIsDisabled(true);
     const animations = cycleSort(array);
-    const array_bars = arrayContainerRef.current!.children;
+    const arrayBars = arrayContainerRef.current!.children;
 
     for (let i = 0; i < animations.length; i++) {
-      const barOne = array_bars[animations[i][0]] as HTMLElement;
-      const barTwo = array_bars[animations[i][1]] as HTMLElement;
-      const swap = animations[i][2];
+      const barOne = arrayBars[animations[i][0]] as HTMLElement;
+      const barTwo = arrayBars[animations[i][1]] as HTMLElement;
+      const action = animations[i][2];
       const barOneHeigth = parseInt(barOne.style.height);
       const barTwoHeigth = parseInt(barTwo.style.height);
       barOne.style.backgroundColor = "yellow";
@@ -128,7 +133,7 @@ export const useSortHandlers = (
 
       await delay(ANIMATION_SPEED);
 
-      if (swap) {
+      if (action === ACTION.SWAP) {
         const temp = barOneHeigth;
         barOne.style.height = `${barTwoHeigth}px`;
         barTwo.style.height = `${temp}px`;
@@ -149,15 +154,16 @@ export const useSortHandlers = (
   const handleQuickSort = async (array: number[]) => {
     setIsDisabled(true);
     const animations = quickSort(array);
-    const array_bars = arrayContainerRef.current!.children;
+    const arrayBars = arrayContainerRef.current!.children;
 
     for (let i = 0; i < animations.length; i++) {
-      const barOne = array_bars[animations[i][0]] as HTMLElement;
-      const barTwo = array_bars[animations[i][1]] as HTMLElement;
+      const barOne = arrayBars[animations[i][0]] as HTMLElement;
+      const barTwo = arrayBars[animations[i][1]] as HTMLElement;
+      const action = animations[i][2];
       const barOneHeigth = parseInt(barOne.style.height);
       const barTwoHeigth = parseInt(barTwo.style.height);
 
-      if (animations[i][2] === 3) {
+      if (action === ACTION.SWAP) {
         barOne.style.backgroundColor = "yellow";
       } else {
         barOne.style.backgroundColor = "red";
@@ -165,7 +171,7 @@ export const useSortHandlers = (
       barTwo.style.backgroundColor = "yellow";
       await delay(ANIMATION_SPEED);
 
-      if (animations[i][2] === 1) {
+      if (action === ACTION.SWAP) {
         barOne.style.height = `${barTwoHeigth}px`;
         barTwo.style.height = `${barOneHeigth}px`;
       }

@@ -1,19 +1,21 @@
+import { ACTION, animationsType } from "../utils/types";
+
 const insertionSort = (array: number[]) => {
   const copiedArray = [...array];
-  const animations = [];
+  const animations: animationsType = [];
 
   for (let i = 1; i < copiedArray.length; i++) {
     const key = copiedArray[i];
     let j = i - 1;
 
     while (j >= 0 && copiedArray[j] > key) {
-      animations.push([j, j + 1, 0]); // Compare j and j+1, 0 means compare
-      animations.push([j + 1, copiedArray[j], 1]); // Overwrite j+1, 1 means overwrite
+      animations.push([j, j + 1, ACTION.COMPARE]);
+      animations.push([j + 1, copiedArray[j], ACTION.SWAP]);
       copiedArray[j + 1] = copiedArray[j];
       j--;
     }
 
-    animations.push([j + 1, key, 1]); // Place the key in its correct position
+    animations.push([j + 1, key, ACTION.SWAP]);
     copiedArray[j + 1] = key;
   }
 

@@ -1,6 +1,8 @@
+import { animationsType } from "../utils/types";
+
 const bubbleSort = (array: number[]) => {
   const copiedArray = [...array];
-  const animations = [];
+  const animations: animationsType = [];
 
   for (let i = 0; i < copiedArray.length - 1; i++) {
     for (let j = 0; j < copiedArray.length - i - 1; j++) {
