@@ -188,8 +188,8 @@ export const useSortHandlers = (
   const handleMergeSort = async (array: number[]) => {
     setIsDisabled(true);
     const animations = mergeSort(array);
+    const arrayBars = arrayContainerRef.current!.children;
     for (let i = 0; i < animations.length; i++) {
-      const arrayBars = document.getElementsByClassName("array-bar");
       const isColorChange = i % 3 !== 2;
       if (isColorChange) {
         const [barOneIdx, barTwoIdx] = animations[i];

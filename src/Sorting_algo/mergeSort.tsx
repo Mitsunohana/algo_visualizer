@@ -21,7 +21,7 @@ function mergeSortHelper(
   startIdx: number,
   endIdx: number,
   auxiliaryArray: number[],
-  animations: number[][],
+  animations: animationsType,
 ) {
   if (startIdx === endIdx) return;
 
