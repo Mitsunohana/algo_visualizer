@@ -1,3 +1,39 @@
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.main-container {
+  height: 100vh;
+  width: auto;
+  display: flex;
+  overflow: hidden;
+}
+
+.buttons-container {
+  width: 200px;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sorting-algorithms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.array-length-input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
 .array-wrapper {
   display: flex;
   width: 100%;
@@ -16,4 +52,8 @@
   background-color: gray;
   margin: 0 1px;
   text-align: center;
+}
+
+hr {
+  width: 120px;
 }
