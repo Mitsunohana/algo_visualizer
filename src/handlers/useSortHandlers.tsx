@@ -7,14 +7,36 @@ import quickSort from "../Sorting_algo/quickSort";
 import { delay } from "../utils/utils";
 import { ACTION } from "../utils/types";
 
-const ANIMATION_SPEED = 1;
-
 export const useSortHandlers = (
   arrayContainerRef: React.RefObject<HTMLDivElement>,
   setIsDisabled: React.Dispatch<React.SetStateAction<boolean>>,
   setIsSorted: React.Dispatch<React.SetStateAction<boolean>>,
-  animationSpeed: number = ANIMATION_SPEED,
+  animationSpeed: number,
 ) => {
+  switch (animationSpeed) {
+    case 1:
+      animationSpeed = 1000;
+      break;
+    case 2:
+      animationSpeed = 100;
+      break;
+    case 3:
+      animationSpeed = 10;
+      break;
+    case 4:
+      animationSpeed = 1;
+      break;
+    case 5:
+      animationSpeed = 0.1;
+      break;
+    case 6:
+      animationSpeed = 0.01;
+      break;
+    case 7:
+      animationSpeed = 0.001;
+      break;
+  }
+
   const handleBubbleSort = async (array: number[]) => {
     setIsDisabled(true);
     const animations = bubbleSort(array);

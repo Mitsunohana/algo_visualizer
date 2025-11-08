@@ -5,14 +5,19 @@
 }
 
 .main-container {
-  height: 100vh;
+  height: calc(100vh - 64px);
   width: auto;
-  display: flex;
-  overflow: hidden;
+  display: grid;
+  grid-template-columns: 200px auto;
+  grid-template-rows: 540px auto;
+  /* overflow: hidden; */
 }
 
 .buttons-container {
-  width: 200px;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
 }
 
 .controls {
@@ -36,22 +41,38 @@
 
 .array-wrapper {
   display: flex;
-  width: 100%;
-  height: 500px;
-  border: 2px solid black;
+  flex-direction: column;
+  align-items: center;
+  grid-column-start: 2;
+  grid-column-end: 3;
 }
 
 .array-container {
+  height: 500px;
   display: flex;
   width: 100%;
   justify-content: center;
   align-items: end;
+  border: 2px solid black;
 }
 .array-bar {
   flex: 1;
   background-color: gray;
   margin: 0 1px;
   text-align: center;
+}
+
+.display-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.complexity-div {
+  background-color: blue;
+}
+
+.code-div {
+  background-color: red;
 }
 
 hr {
