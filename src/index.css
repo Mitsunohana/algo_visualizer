@@ -1,3 +1,11 @@
+* {
+  font-size: 16px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
 .title {
   font-size: 24px;
   font-weight: bold;
@@ -68,13 +76,108 @@
 }
 
 .complexity-div {
-  background-color: blue;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.code-div {
-  background-color: red;
+.time {
+  height: 60%;
+  width: 100%;
+  margin-left: 40px;
+}
+
+.time-complexity,
+.space-complexity {
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.space-complexity {
+  height: 50%;
+}
+
+.space {
+  width: 100%;
+  height: 40%;
+  margin-left: 40px;
+}
+
+/* .code-div {
+} */
+
+.code-box {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.code-box-tab {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.code-box-tab-options {
+  height: 10%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.code-box-codes {
+  background-color: #1e1e1e;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  border-bottom: 2px solid black;
 }
 
 hr {
   width: 120px;
+}
+
+.code-keyword {
+  color: #c792ea;
+  font-weight: 600;
+}
+
+.code-function {
+  color: #82aaff;
+}
+
+.code-variable {
+  color: #f78c6c;
+}
+
+.code-number {
+  color: #f78c6c;
+}
+
+.code-string {
+  color: #c3e88d;
+}
+
+.code-operator {
+  color: #89ddff;
+}
+
+.code-punc {
+  color: #ffffff;
+}
+
+.code-comment {
+  color: #616161;
+  font-style: italic;
+}
+
+.code-builtin {
+  color: #ffcb6b; /* gold */
+}
+.code-default {
+  color: #ffffff; /* default white */
 }

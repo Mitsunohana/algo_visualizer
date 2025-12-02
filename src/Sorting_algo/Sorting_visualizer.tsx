@@ -2,10 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import Button from "../components/Button";
 import { makeNewArray } from "../utils/utils";
 import { useSortHandlers } from "../handlers/useSortHandlers";
+import SortCode from "../components/SortCode";
 
 const Sorting_visualizer = () => {
   const [randomArray, setRandomArray] = useState([0]);
   const [displayName, setDisplayName] = useState("");
+  const [language, setLanguage] = useState("Javascript");
   const [speed, setSpeed] = useState(4);
   const [arrayLength, setArrayLength] = useState(100);
   const [arrayLenghtInput, setArrayLengthInput] = useState("100");
@@ -39,6 +41,40 @@ const Sorting_visualizer = () => {
     setIsSorted(false);
   };
 
+  const quadraticSortsTime = (
+    <div className="time-complexity">
+      <div className="bold">Best Case</div>
+      {(displayName === "Bubble Sort" || displayName === "Insertion Sort") && (
+        <div>O(n)</div>
+      )}
+      {(displayName === "Selection Sort" || displayName === "Cycle Sort") && (
+        <div>O(n^2)</div>
+      )}
+
+      <div className="bold">Average Case</div>
+      <div>O(n^2)</div>
+      <div className="bold">Worst CAse</div>
+      <div>O(n^2)</div>
+    </div>
+  );
+
+  const logLinearSortsTime = (
+    <div className="time-complexity">
+      <div className="bold">Best Case</div>
+      <div>O(n log n)</div>
+      <div className="bold">Average Case</div>
+      <div>O(n log n)</div>
+      <div className="bold">Worst CAse</div>
+      {displayName === "Merge Sort" && <div>O(n log n)</div>}
+      {displayName === "Quick Sort" && (
+        <>
+          <div>O(n^2) </div>
+          <div>if pivots are chosen poorly.</div>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <>
       <div className="main-container">
@@ -69,7 +105,7 @@ const Sorting_visualizer = () => {
               <input
                 type="number"
                 min={20}
-                max={500}
+                max={300}
                 value={arrayLength}
                 onChange={(e) => {
                   setArrayLengthInput(e.target.value);
@@ -78,7 +114,7 @@ const Sorting_visualizer = () => {
                 onBlur={() => {
                   const value = Number(arrayLenghtInput);
                   if (isNaN(value) || value < 20) setArrayLength(20);
-                  else if (value > 500) setArrayLength(500);
+                  else if (value > 300) setArrayLength(300);
                   else setArrayLength(value);
                 }}
                 disabled={isAnimating || isSorted}
@@ -181,8 +217,56 @@ const Sorting_visualizer = () => {
           <div className="display-name">{displayName}</div>
         </div>
 
-        <div className="complexity-div">TIME AND SPACE COMPLEXITY</div>
-        <div className="code-div">CODE</div>
+        <div className="complexity-div">
+          <div className="time">
+            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+              Time Complexity
+            </div>
+            {(displayName === "Bubble Sort" ||
+              displayName === "Selection Sort" ||
+              displayName === "Insertion Sort" ||
+              displayName === "Cycle Sort") &&
+              quadraticSortsTime}
+            {(displayName === "Merge Sort" || displayName === "Quick Sort") &&
+              logLinearSortsTime}
+          </div>
+          <hr />
+          <div className="space">
+            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
+              Space Complexity
+            </div>
+            <div className="space-complexity">
+              {(displayName === "Bubble Sort" ||
+                displayName === "Selection Sort" ||
+                displayName === "Insertion Sort" ||
+                displayName === "Cycle Sort") && <div>O(1)</div>}
+              {displayName === "Merge Sort" && <div>O(n)</div>}
+              {displayName === "Quick Sort" && (
+                <>
+                  <div className="bold">Average Case</div>
+                  <div>O(log n)</div>
+                  <div className="bold">Worst Case</div>
+                  <div>O(n)</div>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+        <div className="code-div">
+          <div className="code-box">
+            <div className="code-box-tab">
+              <div className="code-box-tab-options">Javascript</div>
+              <div className="code-box-tab-options">Python</div>
+              <div className="code-box-tab-options">Java</div>
+              <div className="code-box-tab-options">C</div>
+              <div className="code-box-tab-options">C#</div>
+              <div className="code-box-tab-options">C++</div>
+            </div>
+            <div className="code-box-codes">
+              <SortCode algo={"BubbleSort"} language={"Python"} />
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
