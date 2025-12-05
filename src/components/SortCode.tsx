@@ -22,13 +22,16 @@ import { CycleCodeStringJAVA } from "./CycleSort/CycleCodeStringJAVA";
 import { CycleCodeStringC } from "./CycleSort/CycleCodeStringC";
 import { CycleCodeStringCPP } from "./CycleSort/CycleCodeStringCPP";
 import { CycleCodeStringCS } from "./CycleSort/CycleCodeStringCS";
-import { MergeCodeStringJS } from "./MergeSort/MergeCodeStringJS"
-import { MergeCodeStringPY } from "./MergeSort/MergeCodeStringPy";
-import { MergeCodeStringJAVA } from "./MergeSort/MergeCodeStringJAVA"
+import { MergeCodeStringJS } from "./MergeSort/MergeCodeStringJS";
+import { MergeCodeStringPY } from "./MergeSort/MergeCodeStringPY";
+import { MergeCodeStringJAVA } from "./MergeSort/MergeCodeStringJAVA";
 import { MergeCodeStringC } from "./MergeSort/MergeCodeStringC";
 import { MergeCodeStringCPP } from "./MergeSort/MergeCodeStringCPP";
 import { MergeCodeStringCS } from "./MergeSort/MergeCodeStringCS";
- 
+import { QuickCodeStringC } from "./Quicksort/QuickCodeStringC";
+import { QuickCodeStringCPP } from "./Quicksort/QuickCodeStringCPP";
+import { QuickCodeStringCS } from "./Quicksort/QuickCodeStringCS";
+
 interface SortCodeProps {
   algo: string;
   language: string;
@@ -36,7 +39,7 @@ interface SortCodeProps {
 
 const SortCode: React.FC<SortCodeProps> = ({ algo, language }) => {
   const components: Record<string, Record<string, JSX.Element>> = {
-    BubbleSort: {
+    "Bubble Sort": {
       Javascript: <BubbleCodeStringJS />,
       Python: <BubbleCodeStringPY />,
       Java: <BubbleCodeStringJAVA />,
@@ -44,7 +47,7 @@ const SortCode: React.FC<SortCodeProps> = ({ algo, language }) => {
       CPP: <BubbleCodeStringCPP />,
       CS: <BubbleCodeStringCS />,
     },
-    SelectionSort: {
+    "Selection Sort": {
       Javascript: <SelectionCodeStringJS />,
       Python: <SelectionCodeStringPY />,
       Java: <SelectionCodeStringJAVA />,
@@ -52,7 +55,7 @@ const SortCode: React.FC<SortCodeProps> = ({ algo, language }) => {
       CPP: <SelectionCodeStringCPP />,
       CS: <SelectionCodeStringCS />,
     },
-    InsertionSort: {
+    "Insertion Sort": {
       Javascript: <InsertionCodeStringJS />,
       Python: <InsertionCodeStringPY />,
       Java: <InsertionCodeStringJAVA />,
@@ -60,7 +63,7 @@ const SortCode: React.FC<SortCodeProps> = ({ algo, language }) => {
       CPP: <InsertionCodeStringCPP />,
       CS: <InsertionCodeStringCS />,
     },
-    CycleSort: {
+    "Cycle Sort": {
       Javascript: <CycleCodeStringJS />,
       Python: <CycleCodeStringPY />,
       Java: <CycleCodeStringJAVA />,
@@ -68,14 +71,19 @@ const SortCode: React.FC<SortCodeProps> = ({ algo, language }) => {
       CPP: <CycleCodeStringCPP />,
       CS: <CycleCodeStringCS />,
     },
-    MergeSort: {
+    "Merge Sort": {
       Javascript: <MergeCodeStringJS />,
       Java: <MergeCodeStringJAVA />,
       Python: <MergeCodeStringPY />,
       C: <MergeCodeStringC />,
       CPP: <MergeCodeStringCPP />,
-      CS: <MergeCodeStringCS />
-    }
+      CS: <MergeCodeStringCS />,
+    },
+    "Quick Sort": {
+      C: <QuickCodeStringC />,
+      CPP: <QuickCodeStringCPP />,
+      CS: <QuickCodeStringCS />,
+    },
   };
   const algoMap = components[algo];
   const ComponentToRender = algoMap?.[language];
