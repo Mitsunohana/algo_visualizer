@@ -14,7 +14,7 @@ export const CycleCodeStringCS = () => {
       <span className="code-operator">= </span>
       <span className="code-variable">arr</span>
       <span className="code-punc">.</span>
-      <span className="code-function">Length</span>
+      <span className="code-builtin">Length</span>
       <span className="code-punc">;</span>
       <br />
 

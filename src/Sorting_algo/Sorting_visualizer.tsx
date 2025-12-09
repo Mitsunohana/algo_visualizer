@@ -153,6 +153,7 @@ const Sorting_visualizer = () => {
                 handleBubbleSort(randomArray);
               }}
               disabled={isAnimating || isSorted}
+              activeSort={displayName}
             />
             <Button
               label="Selection Sort"
@@ -162,6 +163,7 @@ const Sorting_visualizer = () => {
                 handleSelectionSort(randomArray);
               }}
               disabled={isAnimating || isSorted}
+              activeSort={displayName}
             />
             <Button
               label="Insertion Sort"
@@ -171,6 +173,7 @@ const Sorting_visualizer = () => {
                 handleInsertionSort(randomArray);
               }}
               disabled={isAnimating || isSorted}
+              activeSort={displayName}
             />
             <Button
               label="Cycle Sort"
@@ -180,6 +183,7 @@ const Sorting_visualizer = () => {
                 handleCycleSort(randomArray);
               }}
               disabled={isAnimating || isSorted}
+              activeSort={displayName}
             />
             <Button
               label="Quick Sort"
@@ -189,6 +193,7 @@ const Sorting_visualizer = () => {
                 handleQuickSort(randomArray);
               }}
               disabled={isAnimating || isSorted}
+              activeSort={displayName}
             />
             <Button
               label="Merge Sort"
@@ -198,6 +203,7 @@ const Sorting_visualizer = () => {
                 handleMergeSort(randomArray);
               }}
               disabled={isAnimating || isSorted}
+              activeSort={displayName}
             />
           </div>
           <hr />
@@ -255,15 +261,85 @@ const Sorting_visualizer = () => {
         <div className="code-div">
           <div className="code-box">
             <div className="code-box-tab">
-              <div className="code-box-tab-options">Javascript</div>
-              <div className="code-box-tab-options">Python</div>
-              <div className="code-box-tab-options">Java</div>
-              <div className="code-box-tab-options">C</div>
-              <div className="code-box-tab-options">C#</div>
-              <div className="code-box-tab-options">C++</div>
+              <div className="code-box-tab-options">
+                <button
+                  className={
+                    language === "Javascript"
+                      ? "active-code-tab-btn"
+                      : "code-tab-btn"
+                  }
+                  onClick={() => {
+                    setLanguage("Javascript");
+                  }}
+                >
+                  Javascript
+                </button>
+              </div>
+              <div className="code-box-tab-options">
+                <button
+                  className={
+                    language === "Python"
+                      ? "active-code-tab-btn"
+                      : "code-tab-btn"
+                  }
+                  onClick={() => {
+                    setLanguage("Python");
+                  }}
+                >
+                  Python
+                </button>
+              </div>
+              <div className="code-box-tab-options">
+                <button
+                  className={
+                    language === "Java" ? "active-code-tab-btn" : "code-tab-btn"
+                  }
+                  onClick={() => {
+                    setLanguage("Java");
+                  }}
+                >
+                  Java
+                </button>
+              </div>
+              <div className="code-box-tab-options">
+                <button
+                  className={
+                    language === "C" ? "active-code-tab-btn" : "code-tab-btn"
+                  }
+                  onClick={() => {
+                    setLanguage("C");
+                  }}
+                >
+                  C
+                </button>
+              </div>
+              <div className="code-box-tab-options">
+                <button
+                  className={
+                    language === "C#" ? "active-code-tab-btn" : "code-tab-btn"
+                  }
+                  onClick={() => {
+                    setLanguage("C#");
+                  }}
+                >
+                  C#
+                </button>
+              </div>
+              <div className="code-box-tab-options">
+                <button
+                  className={
+                    language === "C++" ? "active-code-tab-btn" : "code-tab-btn"
+                  }
+                  onClick={() => {
+                    setLanguage("C++");
+                  }}
+                >
+                  C++
+                </button>
+              </div>
             </div>
             <div className="code-box-codes">
-              <SortCode algo={"BubbleSort"} language={"Python"} />
+              <SortCode algo={displayName} language={language} />
             </div>
           </div>
         </div>

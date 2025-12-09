@@ -14,7 +14,7 @@ export const MergeCodeStringPY = () => {
 
       &nbsp;&nbsp;
       <span className="code-keyword">if </span>
-      <span className="code-function">len</span>
+      <span className="code-builtin">len</span>
       <span className="code-punc">(</span>
       <span className="code-variable">arr</span>
       <span className="code-punc">)</span>
@@ -31,7 +31,7 @@ export const MergeCodeStringPY = () => {
       &nbsp;&nbsp;
       <span className="code-variable">mid</span>
       <span className="code-operator">=</span>
-      <span className="code-function">len</span>
+      <span className="code-builtin">len</span>
       <span className="code-punc">(</span>
       <span className="code-variable">arr</span>
       <span className="code-punc">)</span>
@@ -106,14 +106,14 @@ export const MergeCodeStringPY = () => {
       <span className="code-keyword">while </span>
       <span className="code-variable">i</span>
       <span className="code-operator">&lt;</span>
-      <span className="code-function">len</span>
+      <span className="code-builtin">len</span>
       <span className="code-punc">(</span>
       <span className="code-variable">left</span>
       <span className="code-punc">)</span>
       <span className="code-operator"> and </span>
       <span className="code-variable">j</span>
       <span className="code-operator">&lt;</span>
-      <span className="code-function">len</span>
+      <span className="code-builtin">len</span>
       <span className="code-punc">(</span>
       <span className="code-variable">right</span>
       <span className="code-punc">):</span>
@@ -135,7 +135,7 @@ export const MergeCodeStringPY = () => {
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <span className="code-variable">result</span>
       <span className="code-punc">.</span>
-      <span className="code-function">append</span>
+      <span className="code-builtin">append</span>
       <span className="code-punc">(</span>
       <span className="code-variable">left</span>
       <span className="code-punc">[</span>
@@ -157,7 +157,7 @@ export const MergeCodeStringPY = () => {
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <span className="code-variable">result</span>
       <span className="code-punc">.</span>
-      <span className="code-function">append</span>
+      <span className="code-builtin">append</span>
       <span className="code-punc">(</span>
       <span className="code-variable">right</span>
       <span className="code-punc">[</span>
@@ -178,7 +178,7 @@ export const MergeCodeStringPY = () => {
       &nbsp;&nbsp;
       <span className="code-variable">result</span>
       <span className="code-punc">.</span>
-      <span className="code-function">extend</span>
+      <span className="code-builtin">extend</span>
       <span className="code-punc">(</span>
       <span className="code-variable">left</span>
       <span className="code-punc">[</span>
@@ -189,7 +189,7 @@ export const MergeCodeStringPY = () => {
       &nbsp;&nbsp;
       <span className="code-variable">result</span>
       <span className="code-punc">.</span>
-      <span className="code-function">extend</span>
+      <span className="code-builtin">extend</span>
       <span className="code-punc">(</span>
       <span className="code-variable">right</span>
       <span className="code-punc">[</span>

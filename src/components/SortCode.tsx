@@ -31,6 +31,9 @@ import { MergeCodeStringCS } from "./MergeSort/MergeCodeStringCS";
 import { QuickCodeStringC } from "./Quicksort/QuickCodeStringC";
 import { QuickCodeStringCPP } from "./Quicksort/QuickCodeStringCPP";
 import { QuickCodeStringCS } from "./Quicksort/QuickCodeStringCS";
+import { QuickSortCodeStringJS } from "./Quicksort/QuickCodeStringJS";
+import { QuickCodeStringJava } from "./Quicksort/QuickCodeStringJAVA";
+import { QuickCodeStringPY } from "./Quicksort/QuickCodeStringPY";
 
 interface SortCodeProps {
   algo: string;
@@ -44,45 +47,48 @@ const SortCode: React.FC<SortCodeProps> = ({ algo, language }) => {
       Python: <BubbleCodeStringPY />,
       Java: <BubbleCodeStringJAVA />,
       C: <BubbleCodeStringC />,
-      CPP: <BubbleCodeStringCPP />,
-      CS: <BubbleCodeStringCS />,
+      "C++": <BubbleCodeStringCPP />,
+      "C#": <BubbleCodeStringCS />,
     },
     "Selection Sort": {
       Javascript: <SelectionCodeStringJS />,
       Python: <SelectionCodeStringPY />,
       Java: <SelectionCodeStringJAVA />,
       C: <SelectionCodeStringC />,
-      CPP: <SelectionCodeStringCPP />,
-      CS: <SelectionCodeStringCS />,
+      "C++": <SelectionCodeStringCPP />,
+      "C#": <SelectionCodeStringCS />,
     },
     "Insertion Sort": {
       Javascript: <InsertionCodeStringJS />,
       Python: <InsertionCodeStringPY />,
       Java: <InsertionCodeStringJAVA />,
       C: <InsertionCodeStringC />,
-      CPP: <InsertionCodeStringCPP />,
-      CS: <InsertionCodeStringCS />,
+      "C++": <InsertionCodeStringCPP />,
+      "C#": <InsertionCodeStringCS />,
     },
     "Cycle Sort": {
       Javascript: <CycleCodeStringJS />,
       Python: <CycleCodeStringPY />,
       Java: <CycleCodeStringJAVA />,
       C: <CycleCodeStringC />,
-      CPP: <CycleCodeStringCPP />,
-      CS: <CycleCodeStringCS />,
+      "C++": <CycleCodeStringCPP />,
+      "C#": <CycleCodeStringCS />,
     },
     "Merge Sort": {
       Javascript: <MergeCodeStringJS />,
       Java: <MergeCodeStringJAVA />,
       Python: <MergeCodeStringPY />,
       C: <MergeCodeStringC />,
-      CPP: <MergeCodeStringCPP />,
-      CS: <MergeCodeStringCS />,
+      "C++": <MergeCodeStringCPP />,
+      "C#": <MergeCodeStringCS />,
     },
     "Quick Sort": {
+      Javascript: <QuickSortCodeStringJS />,
+      Java: <QuickCodeStringJava />,
+      Python: <QuickCodeStringPY />,
       C: <QuickCodeStringC />,
-      CPP: <QuickCodeStringCPP />,
-      CS: <QuickCodeStringCS />,
+      "C++": <QuickCodeStringCPP />,
+      "C#": <QuickCodeStringCS />,
     },
   };
   const algoMap = components[algo];

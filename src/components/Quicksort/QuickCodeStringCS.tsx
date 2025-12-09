@@ -38,11 +38,11 @@ export const QuickCodeStringCS = () => (
     <span className="code-operator"> = </span>
     <span className="code-variable">arr</span>
     <span className="code-punc">.</span>
-    <span className="code-function">Skip</span>
+    <span className="code-builtin">Skip</span>
     <span className="code-punc">(</span>
     <span className="code-number">1</span>
     <span className="code-punc">).</span>
-    <span className="code-function">Where</span>
+    <span className="code-builtin">Where</span>
     <span className="code-punc">(</span>
     <span className="code-variable">x</span>
     <span className="code-operator"> =&gt; </span>
@@ -50,7 +50,7 @@ export const QuickCodeStringCS = () => (
     <span className="code-operator">&lt;=</span>
     <span className="code-variable">pivot</span>
     <span className="code-punc">).</span>
-    <span className="code-function">ToArray</span>
+    <span className="code-builtin">ToArray</span>
     <span className="code-punc">();</span>
     <br />
     &nbsp;&nbsp;
@@ -59,11 +59,11 @@ export const QuickCodeStringCS = () => (
     <span className="code-operator"> = </span>
     <span className="code-variable">arr</span>
     <span className="code-punc">.</span>
-    <span className="code-function">Skip</span>
+    <span className="code-builtin">Skip</span>
     <span className="code-punc">(</span>
     <span className="code-number">1</span>
     <span className="code-punc">).</span>
-    <span className="code-function">Where</span>
+    <span className="code-builtin">Where</span>
     <span className="code-punc">(</span>
     <span className="code-variable">x</span>
     <span className="code-operator"> =&gt; </span>
@@ -71,7 +71,7 @@ export const QuickCodeStringCS = () => (
     <span className="code-operator">&gt;</span>
     <span className="code-variable">pivot</span>
     <span className="code-punc">).</span>
-    <span className="code-function">ToArray</span>
+    <span className="code-builtin">ToArray</span>
     <span className="code-punc">();</span>
     <br />
     <br />
@@ -98,17 +98,17 @@ export const QuickCodeStringCS = () => (
     <span className="code-keyword">return </span>
     <span className="code-variable">sortedLeft</span>
     <span className="code-punc">.</span>
-    <span className="code-function">Concat</span>
+    <span className="code-builtin">Concat</span>
     <span className="code-punc">(</span>
     <span className="code-keyword">new int</span>
     <span className="code-punc">[] {"{"} </span>
     <span className="code-variable">pivot</span>
     <span className="code-punc"> {"}"}).</span>
-    <span className="code-function">Concat</span>
+    <span className="code-builtin">Concat</span>
     <span className="code-punc">(</span>
     <span className="code-variable">sortedRight</span>
     <span className="code-punc">).</span>
-    <span className="code-function">ToArray</span>
+    <span className="code-builtin">ToArray</span>
     <span className="code-punc">();</span>
     <br />
     <span className="code-punc">{"}"}</span>

@@ -37,7 +37,7 @@ export const MergeCodeStringJAVA = () => {
       <span className="code-operator">= </span>
       <span className="code-keyword">java.util.Arrays</span>
       <span className="code-punc">.</span>
-      <span className="code-function">copyOfRange</span>
+      <span className="code-builtin">copyOfRange</span>
       <span className="code-punc">(</span>
       <span className="code-variable">arr</span>
       <span className="code-punc">, </span>
@@ -53,7 +53,7 @@ export const MergeCodeStringJAVA = () => {
       <span className="code-operator">= </span>
       <span className="code-keyword">java.util.Arrays</span>
       <span className="code-punc">.</span>
-      <span className="code-function">copyOfRange</span>
+      <span className="code-builtin">copyOfRange</span>
       <span className="code-punc">(</span>
       <span className="code-variable">arr</span>
       <span className="code-punc">, </span>

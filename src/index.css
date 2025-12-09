@@ -6,7 +6,12 @@
   font-weight: bold;
 }
 
+body {
+  /* background-color: #f0eee9; */
+  background-color: #1e1e1e;
+}
 .title {
+  color: #f0eee9;
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
@@ -15,6 +20,7 @@
 .main-container {
   height: calc(100vh - 64px);
   width: auto;
+  color: white;
   display: grid;
   grid-template-columns: 200px auto;
   grid-template-rows: 540px auto;
@@ -64,8 +70,8 @@
   border: 2px solid black;
 }
 .array-bar {
+  background-color: rgb(3, 125, 125);
   flex: 1;
-  background-color: gray;
   margin: 0 1px;
   text-align: center;
 }
@@ -134,12 +140,27 @@
   border-right: 2px solid black;
 }
 
+.code-tab-btn {
+  background-color: #3c3f41;
+  color: #f0eee9;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.active-code-tab-btn {
+  background-color: #f0eee9;
+  color: #3c3f41;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  width: 100%;
+}
+
 .code-box-codes {
   height: 100%;
-  background-color: #1e1e1e;
-  border-right: 2px solid black;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
+  background-color: #282c34;
 }
 
 hr {
@@ -181,8 +202,8 @@ hr {
 }
 
 .code-builtin {
-  color: #ffcb6b; /* gold */
+  color: #ffcb6b;
 }
 .code-default {
-  color: #ffffff; /* default white */
+  color: #ffffff;
 }

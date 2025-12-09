@@ -31,7 +31,7 @@ export const QuickCodeStringCPP = () => {
       <span className="code-punc">(</span>
       <span className="code-variable">arr</span>
       <span className="code-punc">.</span>
-      <span className="code-function">size</span>
+      <span className="code-builtin">size</span>
       <span className="code-punc">()</span>{" "}
       <span className="code-operator">&lt;=</span>
       <span className="code-number">1</span>
@@ -70,7 +70,7 @@ export const QuickCodeStringCPP = () => {
       <span className="code-operator">&lt;</span>{" "}
       <span className="code-variable">arr</span>
       <span className="code-punc">.</span>
-      <span className="code-function">size</span>
+      <span className="code-builtin">size</span>
       <span className="code-punc">()</span>
       <span className="code-punc">;</span>{" "}
       <span className="code-variable">i</span>
@@ -89,7 +89,7 @@ export const QuickCodeStringCPP = () => {
       <span className="code-punc">)</span>{" "}
       <span className="code-variable">left</span>
       <span className="code-punc">.</span>
-      <span className="code-function">push_back</span>
+      <span className="code-builtin">push_back</span>
       <span className="code-punc">(</span>
       <span className="code-variable">arr</span>
       <span className="code-punc">[</span>
@@ -98,8 +98,9 @@ export const QuickCodeStringCPP = () => {
       <span className="code-punc">);</span>
       <br />
       &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-keyword">else</span>{" "}
-      <span className="code-variable">right</span>.
-      <span className="code-function">push_back</span>
+      <span className="code-variable">right</span>
+      <span className="code-punc">.</span>
+      <span className="code-builtin">push_back</span>
       <span className="code-punc">(</span>
       <span className="code-variable">arr</span>
       <span className="code-punc">[</span>
@@ -136,40 +137,40 @@ export const QuickCodeStringCPP = () => {
       <br />
       <br />
       &nbsp;&nbsp;<span className="code-variable">result</span>.
-      <span className="code-function">insert</span>
+      <span className="code-builtin">insert</span>
       <span className="code-punc">(</span>
       <span className="code-variable">result</span>.
-      <span className="code-function">end</span>
+      <span className="code-builtin">end</span>
       <span className="code-punc">()</span>
       <span className="code-punc">,</span>{" "}
       <span className="code-variable">sortedLeft</span>.
-      <span className="code-function">begin</span>
+      <span className="code-builtin">begin</span>
       <span className="code-punc">()</span>
       <span className="code-punc">,</span>{" "}
       <span className="code-variable">sortedLeft</span>.
-      <span className="code-function">end</span>
+      <span className="code-builtin">end</span>
       <span className="code-punc">()</span>
       <span className="code-punc">);</span>
       <br />
       &nbsp;&nbsp;<span className="code-variable">result</span>.
-      <span className="code-function">push_back</span>
+      <span className="code-builtin">push_back</span>
       <span className="code-punc">(</span>
       <span className="code-variable">pivot</span>
       <span className="code-punc">);</span>
       <br />
       &nbsp;&nbsp;<span className="code-variable">result</span>.
-      <span className="code-function">insert</span>
+      <span className="code-builtin">insert</span>
       <span className="code-punc">(</span>
       <span className="code-variable">result</span>.
-      <span className="code-function">end</span>
+      <span className="code-builtin">end</span>
       <span className="code-punc">()</span>
       <span className="code-punc">,</span>{" "}
       <span className="code-variable">sortedRight</span>.
-      <span className="code-function">begin</span>
+      <span className="code-builtin">begin</span>
       <span className="code-punc">()</span>
       <span className="code-punc">,</span>{" "}
       <span className="code-variable">sortedRight</span>.
-      <span className="code-function">end</span>
+      <span className="code-builtin">end</span>
       <span className="code-punc">()</span>
       <span className="code-punc">);</span>
       <br />

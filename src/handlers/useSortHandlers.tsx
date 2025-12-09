@@ -62,8 +62,8 @@ export const useSortHandlers = (
 
       await delay(animationSpeed);
 
-      barOne.style.backgroundColor = "gray";
-      barTwo.style.backgroundColor = "gray";
+      barOne.style.backgroundColor = "rgb(3, 125, 125)";
+      barTwo.style.backgroundColor = "rgb(3, 125, 125)";
 
       await delay(animationSpeed);
     }
@@ -90,8 +90,8 @@ export const useSortHandlers = (
       }
       await delay(animationSpeed);
 
-      barOne.style.backgroundColor = "gray";
-      barTwo.style.backgroundColor = "gray";
+      barOne.style.backgroundColor = "rgb(3, 125, 125)";
+      barTwo.style.backgroundColor = "rgb(3, 125, 125)";
 
       if (action === ACTION.SWAP && barOneHeigth < barToSwapHeigth) {
         barOne.style.height = `${barToSwapHeigth}px`;
@@ -121,8 +121,8 @@ export const useSortHandlers = (
 
         await delay(animationSpeed);
 
-        barOne.style.backgroundColor = "gray";
-        barTwo.style.backgroundColor = "gray";
+        barOne.style.backgroundColor = "rgb(3, 125, 125)";
+        barTwo.style.backgroundColor = "rgb(3, 125, 125)";
       } else if (action === ACTION.SWAP) {
         const barOne = arrayBars[index1] as HTMLElement;
         barOne.style.height = `${index2OrValue}px`;
@@ -130,7 +130,7 @@ export const useSortHandlers = (
 
         await delay(animationSpeed);
 
-        barOne.style.backgroundColor = "gray";
+        barOne.style.backgroundColor = "rgb(3, 125, 125)";
       }
 
       await delay(animationSpeed);
@@ -164,8 +164,8 @@ export const useSortHandlers = (
 
       await delay(animationSpeed);
 
-      barOne.style.backgroundColor = "gray";
-      barTwo.style.backgroundColor = "gray";
+      barOne.style.backgroundColor = "rgb(3, 125, 125)";
+      barTwo.style.backgroundColor = "rgb(3, 125, 125)";
 
       await delay(animationSpeed);
     }
@@ -199,8 +199,8 @@ export const useSortHandlers = (
         barTwo.style.height = `${barOneHeigth}px`;
       }
 
-      barOne.style.backgroundColor = "gray";
-      barTwo.style.backgroundColor = "gray";
+      barOne.style.backgroundColor = "rgb(3, 125, 125)";
+      barTwo.style.backgroundColor = "rgb(3, 125, 125)";
 
       await delay(animationSpeed);
     }
@@ -221,7 +221,7 @@ export const useSortHandlers = (
 
         const barOneStyle = arrayBar1.style;
         const barTwoStyle = arrayBar2.style;
-        const color = i % 3 === 0 ? "yellow" : "gray";
+        const color = i % 3 === 0 ? "yellow" : "rgb(3, 125, 125)";
 
         await delay(animationSpeed);
 
