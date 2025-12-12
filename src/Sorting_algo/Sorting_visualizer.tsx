@@ -9,8 +9,8 @@ const Sorting_visualizer = () => {
   const [displayName, setDisplayName] = useState("");
   const [language, setLanguage] = useState("Javascript");
   const [speed, setSpeed] = useState(3);
-  const [arrayLength, setArrayLength] = useState(100);
-  const [arrayLenghtInput, setArrayLengthInput] = useState("100");
+  const [arrayLength, setArrayLength] = useState(50);
+  const [arrayLenghtInput, setArrayLengthInput] = useState("50");
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSorted, setIsSorted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -101,11 +101,11 @@ const Sorting_visualizer = () => {
             />
 
             <div className="array-length-input">
-              <label style={{ fontSize: "12px" }}>Array Length</label>
+              <label>Array Length</label>
               <input
                 type="number"
-                min={20}
-                max={300}
+                min={10}
+                max={200}
                 value={arrayLength}
                 onChange={(e) => {
                   setArrayLengthInput(e.target.value);
@@ -113,8 +113,8 @@ const Sorting_visualizer = () => {
                 }}
                 onBlur={() => {
                   const value = Number(arrayLenghtInput);
-                  if (isNaN(value) || value < 20) setArrayLength(20);
-                  else if (value > 300) setArrayLength(300);
+                  if (isNaN(value) || value < 5) setArrayLength(5);
+                  else if (value > 200) setArrayLength(200);
                   else setArrayLength(value);
                 }}
                 disabled={isAnimating || isSorted}
@@ -129,7 +129,7 @@ const Sorting_visualizer = () => {
               onChange={(e) => setSpeed(Number(e.target.value))}
               disabled={isDisabled}
             ></input>
-            <label style={{ fontSize: "12px" }}>Speed</label>
+            <label>Speed</label>
 
             <datalist id="speed-markers">
               <option value="1"></option>
