@@ -53,6 +53,10 @@ body {
   justify-content: space-evenly;
 }
 
+input[type="range"]::-webkit-slider-tick-mark {
+  background-color: white;
+}
+
 .array-wrapper {
   display: flex;
   flex-direction: column;

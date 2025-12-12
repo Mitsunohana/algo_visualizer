@@ -6,6 +6,7 @@ import cycleSort from "../Sorting_algo/cycleSort";
 import quickSort from "../Sorting_algo/quickSort";
 import { delay } from "../utils/utils";
 import { ACTION } from "../utils/types";
+import { playSound, sounds } from "../utils/audio";
 
 export const useSortHandlers = (
   arrayContainerRef: React.RefObject<HTMLDivElement>,
@@ -15,25 +16,19 @@ export const useSortHandlers = (
 ) => {
   switch (animationSpeed) {
     case 1:
-      animationSpeed = 1000;
+      animationSpeed = 500;
       break;
     case 2:
-      animationSpeed = 100;
+      animationSpeed = 250;
       break;
     case 3:
-      animationSpeed = 10;
+      animationSpeed = 100;
       break;
     case 4:
-      animationSpeed = 1;
+      animationSpeed = 50;
       break;
     case 5:
-      animationSpeed = 0.1;
-      break;
-    case 6:
-      animationSpeed = 0.01;
-      break;
-    case 7:
-      animationSpeed = 0.001;
+      animationSpeed = 20;
       break;
   }
 
@@ -50,6 +45,7 @@ export const useSortHandlers = (
       barOne.style.backgroundColor = "yellow";
       barTwo.style.backgroundColor = "yellow";
 
+      playSound(sounds.compare);
       await delay(animationSpeed);
 
       if (barOneHeigth > barTwoHeigth) {
@@ -58,6 +54,7 @@ export const useSortHandlers = (
         barTwo.style.height = `${temp}px`;
         barOne.style.backgroundColor = "red";
         barTwo.style.backgroundColor = "red";
+        playSound(sounds.swap);
       }
 
       await delay(animationSpeed);
@@ -88,6 +85,7 @@ export const useSortHandlers = (
         barOne.style.backgroundColor = "yellow";
         barTwo.style.backgroundColor = "yellow";
       }
+      playSound(sounds.compare);
       await delay(animationSpeed);
 
       barOne.style.backgroundColor = "rgb(3, 125, 125)";
@@ -96,6 +94,7 @@ export const useSortHandlers = (
       if (action === ACTION.SWAP && barOneHeigth < barToSwapHeigth) {
         barOne.style.height = `${barToSwapHeigth}px`;
         barToSwap.style.height = `${barOneHeigth}px`;
+        playSound(sounds.swap);
       }
 
       await delay(animationSpeed);
@@ -118,7 +117,7 @@ export const useSortHandlers = (
         const barTwo = arrayBars[index2OrValue] as HTMLElement;
         barOne.style.backgroundColor = "yellow";
         barTwo.style.backgroundColor = "yellow";
-
+        playSound(sounds.compare);
         await delay(animationSpeed);
 
         barOne.style.backgroundColor = "rgb(3, 125, 125)";
@@ -127,7 +126,7 @@ export const useSortHandlers = (
         const barOne = arrayBars[index1] as HTMLElement;
         barOne.style.height = `${index2OrValue}px`;
         barOne.style.backgroundColor = "red";
-
+        playSound(sounds.swap);
         await delay(animationSpeed);
 
         barOne.style.backgroundColor = "rgb(3, 125, 125)";
@@ -153,13 +152,14 @@ export const useSortHandlers = (
       const barTwoHeigth = parseInt(barTwo.style.height);
       barOne.style.backgroundColor = "yellow";
       barTwo.style.backgroundColor = "yellow";
-
+      playSound(sounds.compare);
       await delay(animationSpeed);
 
       if (action === ACTION.SWAP) {
         const temp = barOneHeigth;
         barOne.style.height = `${barTwoHeigth}px`;
         barTwo.style.height = `${temp}px`;
+        playSound(sounds.swap);
       }
 
       await delay(animationSpeed);
@@ -185,9 +185,10 @@ export const useSortHandlers = (
       const action = animations[i][2];
       const barOneHeigth = parseInt(barOne.style.height);
       const barTwoHeigth = parseInt(barTwo.style.height);
-
+      playSound(sounds.compare);
       if (action === ACTION.SWAP) {
         barOne.style.backgroundColor = "yellow";
+        playSound(sounds.compare);
       } else {
         barOne.style.backgroundColor = "red";
       }
@@ -197,6 +198,7 @@ export const useSortHandlers = (
       if (action === ACTION.SWAP) {
         barOne.style.height = `${barTwoHeigth}px`;
         barTwo.style.height = `${barOneHeigth}px`;
+        playSound(sounds.swap);
       }
 
       barOne.style.backgroundColor = "rgb(3, 125, 125)";
@@ -222,6 +224,7 @@ export const useSortHandlers = (
         const barOneStyle = arrayBar1.style;
         const barTwoStyle = arrayBar2.style;
         const color = i % 3 === 0 ? "yellow" : "rgb(3, 125, 125)";
+        playSound(sounds.compare);
 
         await delay(animationSpeed);
 
@@ -234,6 +237,7 @@ export const useSortHandlers = (
         const arrayBar1 = arrayBars[barOneIdx] as HTMLElement;
         const barOneStyle = arrayBar1.style;
         barOneStyle.height = `${newHeight}px`;
+        playSound(sounds.swap);
       }
       await delay(animationSpeed);
     }

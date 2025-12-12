@@ -8,7 +8,7 @@ const Sorting_visualizer = () => {
   const [randomArray, setRandomArray] = useState([0]);
   const [displayName, setDisplayName] = useState("");
   const [language, setLanguage] = useState("Javascript");
-  const [speed, setSpeed] = useState(4);
+  const [speed, setSpeed] = useState(3);
   const [arrayLength, setArrayLength] = useState(100);
   const [arrayLenghtInput, setArrayLengthInput] = useState("100");
   const [isDisabled, setIsDisabled] = useState(false);
@@ -122,7 +122,7 @@ const Sorting_visualizer = () => {
             </div>
             <input
               type="range"
-              max={7}
+              max={5}
               min={1}
               list="speed-markers"
               value={speed}
@@ -137,8 +137,6 @@ const Sorting_visualizer = () => {
               <option value="3"></option>
               <option value="4"></option>
               <option value="5"></option>
-              <option value="6"></option>
-              <option value="7"></option>
             </datalist>
           </div>
           <hr />
