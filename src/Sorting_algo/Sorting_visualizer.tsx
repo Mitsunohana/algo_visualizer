@@ -14,6 +14,7 @@ const Sorting_visualizer = () => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isSorted, setIsSorted] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [barValue, setBarValue] = useState(500);
   const arrayContainerRef = useRef<HTMLDivElement>(null);
 
   const {
@@ -26,8 +27,24 @@ const Sorting_visualizer = () => {
   } = useSortHandlers(arrayContainerRef, setIsDisabled, setIsSorted, speed);
 
   useEffect(() => {
-    setRandomArray(makeNewArray(arrayLength));
-  }, [arrayLength]);
+    const checkScreenSize = () => {
+      if (window.innerWidth <= 768) {
+        setBarValue(250);
+      } else {
+        setBarValue(500);
+      }
+    };
+
+    checkScreenSize();
+
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => window.removeEventListener("resize", checkScreenSize);
+  }, []);
+
+  useEffect(() => {
+    setRandomArray(makeNewArray(arrayLength, barValue));
+  }, [arrayLength, barValue]);
 
   const resetBars = () => {
     const bars = arrayContainerRef.current?.children;
@@ -79,130 +96,138 @@ const Sorting_visualizer = () => {
     <>
       <div className="main-container">
         <div className="buttons-container">
-          <div className="controls">
-            <label>Controls:</label>
-            <Button
-              label="Generate new array"
-              onClick={() => {
-                setDisplayName("");
-                setRandomArray(makeNewArray(arrayLength));
-                setIsAnimating(false);
-                setIsSorted(false);
-              }}
-              disabled={isDisabled}
-            />
-            <Button
-              label="Reset Array"
-              onClick={() => {
-                setDisplayName("");
-                resetBars();
-              }}
-              disabled={!isSorted}
-            />
-
-            <div className="array-length-input">
-              <label>Array Length</label>
-              <input
-                type="number"
-                min={10}
-                max={200}
-                value={arrayLength}
-                onChange={(e) => {
-                  setArrayLengthInput(e.target.value);
-                  setArrayLength(Number(e.target.value));
+          <div className="buttons-container-inner-div">
+            <label style={{ fontWeight: "bold", marginLeft: "20px" }}>
+              Controls:
+            </label>
+            <div className="controls">
+              <Button
+                label="Generate new array"
+                onClick={() => {
+                  setDisplayName("");
+                  setRandomArray(makeNewArray(arrayLength, barValue));
+                  setIsAnimating(false);
+                  setIsSorted(false);
                 }}
-                onBlur={() => {
-                  const value = Number(arrayLenghtInput);
-                  if (isNaN(value) || value < 5) setArrayLength(5);
-                  else if (value > 200) setArrayLength(200);
-                  else setArrayLength(value);
+                disabled={isDisabled}
+              />
+              <Button
+                label="Reset Array"
+                onClick={() => {
+                  setDisplayName("");
+                  resetBars();
+                }}
+                disabled={!isSorted}
+              />
+
+              <div className="array-length-input">
+                <label style={{ fontSize: 12 }}>Array Length</label>
+                <input
+                  type="number"
+                  min={10}
+                  max={200}
+                  value={arrayLength}
+                  onChange={(e) => {
+                    setArrayLengthInput(e.target.value);
+                    setArrayLength(Number(e.target.value));
+                  }}
+                  onBlur={() => {
+                    const value = Number(arrayLenghtInput);
+                    if (isNaN(value) || value < 5) setArrayLength(5);
+                    else if (value > 200) setArrayLength(200);
+                    else setArrayLength(value);
+                  }}
+                  disabled={isAnimating || isSorted}
+                />
+              </div>
+              <input
+                type="range"
+                max={5}
+                min={1}
+                list="speed-markers"
+                value={speed}
+                onChange={(e) => setSpeed(Number(e.target.value))}
+                disabled={isDisabled}
+              ></input>
+              <label style={{ fontSize: 12 }}>Speed</label>
+
+              <datalist id="speed-markers">
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+              </datalist>
+            </div>
+            <hr />
+            <label
+              className="sorting-algorithms-label"
+              style={{ fontWeight: "bold", marginLeft: "20px" }}
+            >
+              Sorting Algorithms:
+            </label>
+            <div className="sorting-algorithms">
+              <Button
+                label="Bubble Sort"
+                onClick={() => {
+                  setDisplayName("Bubble Sort");
+                  setIsAnimating(true);
+                  handleBubbleSort(randomArray);
                 }}
                 disabled={isAnimating || isSorted}
+                activeSort={displayName}
+              />
+              <Button
+                label="Selection Sort"
+                onClick={() => {
+                  setDisplayName("Selection Sort");
+                  setIsAnimating(true);
+                  handleSelectionSort(randomArray);
+                }}
+                disabled={isAnimating || isSorted}
+                activeSort={displayName}
+              />
+              <Button
+                label="Insertion Sort"
+                onClick={() => {
+                  setDisplayName("Insertion Sort");
+                  setIsAnimating(true);
+                  handleInsertionSort(randomArray);
+                }}
+                disabled={isAnimating || isSorted}
+                activeSort={displayName}
+              />
+              <Button
+                label="Cycle Sort"
+                onClick={() => {
+                  setDisplayName("Cycle Sort");
+                  setIsAnimating(true);
+                  handleCycleSort(randomArray);
+                }}
+                disabled={isAnimating || isSorted}
+                activeSort={displayName}
+              />
+              <Button
+                label="Quick Sort"
+                onClick={() => {
+                  setDisplayName("Quick Sort");
+                  setIsAnimating(true);
+                  handleQuickSort(randomArray);
+                }}
+                disabled={isAnimating || isSorted}
+                activeSort={displayName}
+              />
+              <Button
+                label="Merge Sort"
+                onClick={() => {
+                  setDisplayName("Merge Sort");
+                  setIsAnimating(true);
+                  handleMergeSort(randomArray);
+                }}
+                disabled={isAnimating || isSorted}
+                activeSort={displayName}
               />
             </div>
-            <input
-              type="range"
-              max={5}
-              min={1}
-              list="speed-markers"
-              value={speed}
-              onChange={(e) => setSpeed(Number(e.target.value))}
-              disabled={isDisabled}
-            ></input>
-            <label>Speed</label>
-
-            <datalist id="speed-markers">
-              <option value="1"></option>
-              <option value="2"></option>
-              <option value="3"></option>
-              <option value="4"></option>
-              <option value="5"></option>
-            </datalist>
-          </div>
-          <hr />
-          <div className="sorting-algorithms">
-            <label>Sort</label>
-
-            <Button
-              label="Bubble Sort"
-              onClick={() => {
-                setDisplayName("Bubble Sort");
-                setIsAnimating(true);
-                handleBubbleSort(randomArray);
-              }}
-              disabled={isAnimating || isSorted}
-              activeSort={displayName}
-            />
-            <Button
-              label="Selection Sort"
-              onClick={() => {
-                setDisplayName("Selection Sort");
-                setIsAnimating(true);
-                handleSelectionSort(randomArray);
-              }}
-              disabled={isAnimating || isSorted}
-              activeSort={displayName}
-            />
-            <Button
-              label="Insertion Sort"
-              onClick={() => {
-                setDisplayName("Insertion Sort");
-                setIsAnimating(true);
-                handleInsertionSort(randomArray);
-              }}
-              disabled={isAnimating || isSorted}
-              activeSort={displayName}
-            />
-            <Button
-              label="Cycle Sort"
-              onClick={() => {
-                setDisplayName("Cycle Sort");
-                setIsAnimating(true);
-                handleCycleSort(randomArray);
-              }}
-              disabled={isAnimating || isSorted}
-              activeSort={displayName}
-            />
-            <Button
-              label="Quick Sort"
-              onClick={() => {
-                setDisplayName("Quick Sort");
-                setIsAnimating(true);
-                handleQuickSort(randomArray);
-              }}
-              disabled={isAnimating || isSorted}
-              activeSort={displayName}
-            />
-            <Button
-              label="Merge Sort"
-              onClick={() => {
-                setDisplayName("Merge Sort");
-                setIsAnimating(true);
-                handleMergeSort(randomArray);
-              }}
-              disabled={isAnimating || isSorted}
-              activeSort={displayName}
-            />
           </div>
           <hr />
         </div>
@@ -220,12 +245,10 @@ const Sorting_visualizer = () => {
           </div>
           <div className="display-name">{displayName}</div>
         </div>
-
+        {/* TODO: Make the text - Best Case, Average Casce, Worst Case permanently display on screen */}
         <div className="complexity-div">
           <div className="time">
-            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
-              Time Complexity
-            </div>
+            <div style={{ fontWeight: "bold" }}>Time Complexity</div>
             {(displayName === "Bubble Sort" ||
               displayName === "Selection Sort" ||
               displayName === "Insertion Sort" ||
@@ -236,9 +259,7 @@ const Sorting_visualizer = () => {
           </div>
           <hr />
           <div className="space">
-            <div style={{ fontSize: "18px", fontWeight: "bold" }}>
-              Space Complexity
-            </div>
+            <div style={{ fontWeight: "bold" }}>Space Complexity</div>
             <div className="space-complexity">
               {(displayName === "Bubble Sort" ||
                 displayName === "Selection Sort" ||
@@ -259,6 +280,7 @@ const Sorting_visualizer = () => {
         <div className="code-div">
           <div className="code-box">
             <div className="code-box-tab">
+              {/* TODO: Change the language text to a logo */}
               <div className="code-box-tab-options">
                 <button
                   className={
@@ -270,7 +292,7 @@ const Sorting_visualizer = () => {
                     setLanguage("Javascript");
                   }}
                 >
-                  Javascript
+                  JS
                 </button>
               </div>
               <div className="code-box-tab-options">

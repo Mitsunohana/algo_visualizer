@@ -1,7 +1,7 @@
-export const makeNewArray = (quantity = 50) => {
+export const makeNewArray = (quantity = 50, value = 500) => {
   const newArray = [];
   for (let i = 0; i < quantity; i++) {
-    newArray.push(randomIntFromIntervals(5, 500));
+    newArray.push(randomIntFromIntervals(5, value));
   }
   return newArray;
 };
